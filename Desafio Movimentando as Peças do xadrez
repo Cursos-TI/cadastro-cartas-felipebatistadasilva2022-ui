@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int movimentoValidoCavalo(int linhaAtual, int colAtual, int linhaDestino, int colDestino) {
+    int diffLinha = linhaDestino - linhaAtual;
+    int diffCol = colDestino - colAtual;
+
+    // Movimento em L: 2 passos em uma direção e 1 na outra
+    if ((diffLinha == 2 || diffLinha == -2) && (diffCol == 1 || diffCol == -1))
+        return 1;
+    if ((diffLinha == 1 || diffLinha == -1) && (diffCol == 2 || diffCol == -2))
+        return 1;
+    
+    return 0;
+}
+
+int main() {
+    int linhaAtual, colAtual, linhaDestino, colDestino;
+
+    printf("Tabuleiro de Xadrez 8x8 (linhas e colunas de 1 a 8)\n");
+    printf("Vamos mover um Cavalo!\n\n");
+
+    printf("Digite a posição atual do cavalo (linha coluna): ");
+    scanf("%d %d", &linhaAtual, &colAtual);
+
+    printf("Digite a posição de destino (linha coluna): ");
+    scanf("%d %d", &linhaDestino, &colDestino);
+
+    // Verifica se as posições estão dentro do tabuleiro
+    if (linhaAtual < 1 || linhaAtual > 8 || colAtual < 1 || colAtual > 8 ||
+        linhaDestino < 1 || linhaDestino > 8 || colDestino < 1 || colDestino > 8) {
+        printf("Posição inválida! Linhas e colunas devem estar entre 1 e 8.\n");
+        return 1;
+    }
+
+    if (movimentoValidoCavalo(linhaAtual, colAtual, linhaDestino, colDestino)) {
+        printf("Movimento válido! O cavalo foi movido de (%d,%d) para (%d,%d).\n",
+            linhaAtual, colAtual, linhaDestino, colDestino);
+    } else {
+        printf("Movimento inválido para o cavalo!\n");
+    }
+
+    return 0;
+}
